@@ -1,0 +1,25 @@
+Algorithm 1 Statistic-based sparse Transformer (SSFormer)
+Input: Feature map X  RH×W×C, Split factor S, and patch size rate P.
+Initialization: The Sets of patches Sets = {}; Layer number L; Max iteration time T; Iteration index t = 0.
+1:	While t < T do
+Stage1:	Adaptive split and patches grouping
+2:	for i in P do
+3:	Compute patch sizes Ni = (S * 2i) / 2L-1
+4:	Split feature X to patch sets Patchesi = {p1, p2, …, pk}
+5:	Add Patchesi into Sets
+6:	end for
+Stage2:	Statistic-based patch discriminator and feature aggregation
+7:	for Patchesi in Sets do
+8:	for patch in patchesi do
+9:	Perform F-test (p, X) using (8)
+
+10:	Return statistical result SR
+11:	if SR do
+12:	Update p  att(patch) using (7)
+
+13:	end for
+14:	Aggregate patchesi to Xi
+15:	end for
+16:	t++
+17:	end while
+Output refined feature map X’
